@@ -1,7 +1,8 @@
-- hosts: 
+- hosts:
+    - hetzner_nodes 
     - masters
     - workers
-  gather_facts: true
+  gather_facts: True
   become: True
   any_errors_fatal: false
   tags: ['pre_ops']
@@ -9,7 +10,8 @@
     - import_role:
         name: common
         tasks_from: upgrade
-    - import_role:
-        name: common
-        tasks_from: install_zerotier
+      tags: ["pre_ops"]
+#    - import_role:
+#        name: common
+#        tasks_from: install_zerotier
 
