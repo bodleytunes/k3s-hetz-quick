@@ -1,0 +1,12 @@
+- hosts: 
+    - masters
+    - workers
+  gather_facts: true
+  become: True
+  any_errors_fatal: false
+  tags: ['pre_ops']
+  tasks:
+    - import_role:
+        name: common
+        tasks_from: upgrade
+

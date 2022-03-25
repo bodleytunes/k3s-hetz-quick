@@ -1,0 +1,9 @@
+- hosts: 
+    - masters
+  gather_facts: true
+  become: True
+  any_errors_fatal: false
+  tags: ['download_k3s']
+  tasks:
+    - import_role:
+        name: k3s

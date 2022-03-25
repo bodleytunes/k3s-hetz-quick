@@ -1,0 +1,12 @@
+# Day "N" Continuing Operations
+# general ops
+- import_playbook: playbooks/operational/pre_ops.yml
+  tags: ["pre_ops"]
+
+# storage ops
+- import_playbook: playbooks/operational/main.yml
+  tags: ["main"]
+# firewall ops
+- import_playbook: playbooks/operational/post_ops.yml
+  tags: ["post_opts"]
+
