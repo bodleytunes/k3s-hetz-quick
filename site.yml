@@ -3,10 +3,10 @@
   tags: ["pre_ops"]
 
 # main ops
-- import_playbook: playbooks/operational/main.yml
-  tags: ["main"]
-  
+#- import_playbook: playbooks/operational/main.yml
+#  tags: ["main"]
+
 # post ops
-- import_playbook: playbooks/operational/post_ops.yml
-  tags: ["post_opts"]
+#- import_playbook: playbooks/operational/post_ops.yml
+#  tags: ["post_opts"]
 
