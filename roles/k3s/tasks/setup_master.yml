@@ -79,7 +79,7 @@
   set_fact: 
     helm_version: "{{ helm_version.stdout | from_json | community.general.json_query(tag_query) }}"
   vars:
-    tag_query: ".tag_name"
+    tag_query: "[*].tag_name"
   tags: [helm]
 
 
