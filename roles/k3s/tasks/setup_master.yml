@@ -118,7 +118,8 @@
   tags: [helm]
 
 - name: set fact
-  helm_version: ( {{ helm_version }} | replace('"','')     )
+  set_fact:
+    helm_version: ( {{ helm_version }} | replace('"','')  )
 
 - name: Download and extract helm
   unarchive:
