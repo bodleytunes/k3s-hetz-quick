@@ -101,7 +101,6 @@
   args:
     warn: no
   register: helm_version
-  warn: no
   when: ( "{{ inventory_hostname }}" == "{{ groups['masters'][0] }}" )
   tags: [helm]
 
