@@ -113,7 +113,7 @@
   shell: curl -s https://api.github.com/repos/helm/helm/releases/latest | jq [.][0].tag_name
   args:
     warn: no
-  register: helm_version.stdout[1:-1]
+  register: ( helm_version.stdout | replace('"','') )
   when: ( "{{ inventory_hostname }}" == "{{ groups['masters'][0] }}" )
   tags: [helm]
 
