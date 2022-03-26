@@ -4,9 +4,3 @@
     upgrade: dist
     autoremove: yes
 
-
-- name: dist-upgrade2
-  apt:
-    update_cache: yes
-    upgrade: dist
-    autoremove: yes
