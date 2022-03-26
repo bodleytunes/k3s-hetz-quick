@@ -2,7 +2,6 @@
 # get facts
 - name: get facts
   setup:
-    gather_facts: yes
   tags: [helm]
 
 # install packages via apt
