@@ -1,0 +1,6 @@
+# run zerotier command with ansible to join network
+# zerotier-cli join <network_id>
+- name: zerotier join network
+  shell: zerotier-cli join {{ zerotier_network_id }}
+  when: zerotier_network_id is defined
+  
