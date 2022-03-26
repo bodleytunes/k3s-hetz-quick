@@ -23,9 +23,7 @@
     path: /usr/local/etc/ansible/facts.d
     state: directory
     owner: root
-    group: wheel
-  tags:
-    - ansible
+    #group: wheel
 
 - name: zerotier | add ansible peer status collector
   copy:
