@@ -1,5 +1,6 @@
 ---
 
+
 - name: zerotier get ip info from
   command: zerotier-cli listnetworks 1db510c0229f8d55 -j
   register: zerotier_network

@@ -13,6 +13,19 @@
 
 - hosts: 
     - masters
+    - workers
+  gather_facts: true
+  become: True
+  any_errors_fatal: false
+  tags: ['k3s_uninstall']
+  tasks:
+    - import_role:
+        name: k3s
+        tasks_from: k3s_uninstall
+      tags: ['k3s_uninstall']
+
+- hosts: 
+    - masters
   gather_facts: true
   become: True
   any_errors_fatal: false
