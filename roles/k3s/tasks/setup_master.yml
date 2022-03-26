@@ -113,9 +113,12 @@
   shell: curl -s https://api.github.com/repos/helm/helm/releases/latest | jq [.][0].tag_name
   args:
     warn: no
-  register: ( helm_version.stdout | replace('"','') )
+  register: ( helm_version.stdout )
   when: ( "{{ inventory_hostname }}" == "{{ groups['masters'][0] }}" )
   tags: [helm]
+
+- name: set fact
+  helm_version: ( {{ helm_version }} | replace('"','')     )
 
 - name: Download and extract helm
   unarchive:
