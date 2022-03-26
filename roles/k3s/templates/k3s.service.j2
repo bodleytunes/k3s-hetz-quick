@@ -1,35 +1,6 @@
 [Unit]
 Description=Lightweight Kubernetes
 Documentation=https://k3s.io
-After=network-online.target
-
-[Service]
-Environment=K3S_TOKEN="k3scentral"
-
-Type=notify
-ExecStartPre=-/sbin/modprobe br_netfilter
-ExecStartPre=-/sbin/modprobe overlay
-ExecStart=/usr/local/bin/k3s server --cluster-init \
-    --node-label device.k3s.redcarpetup.com/roles={{roles | default ('undefined')}} --node-name={{ ansible_fqdn }} --tls-san={{ ansible_hostname }} --tls-san={{ master_ip }} --tls-san={{ hostvars[inventory_hostname]['ansible_default_ipv4']['address']
- }} --tls-san={{ ansible_fqdn }} --flannel-backend=none --disable-network-policy --kube-proxy-arg "metrics-bind-address=0.0.0.0" --kube-scheduler-arg "bind-address=0.0.0.0" --kube-controller-arg "bind-address=0.0.0.0"
-KillMode=process
-Delegate=yes
-LimitNOFILE=infinity
-LimitNPROC=infinity
-LimitCORE=infinity
-TasksMax=infinity
-TimeoutStartSec=infinity
-Restart=always
-RestartSec=5s
-
-[Install]
-WantedBy=multi-user.target
-
-
-
-[Unit]
-Description=Lightweight Kubernetes
-Documentation=https://k3s.io
 Wants=network-online.target
 After=network-online.target
 
@@ -57,12 +28,20 @@ ExecStartPre=-/sbin/modprobe br_netfilter
 ExecStartPre=-/sbin/modprobe overlay
 ExecStart=/usr/local/bin/k3s \
     server \
-        --cluster-init \
-        --node-ip {{ zerotier_ip }} \
-        --node-label master.wizznet.co.uk/roles=master \
-        --no-deploy traefik \
-        --no-deploy servicelb \
-        --etcd-snapshot-retention=24 \
-        --flannel-backend=none \
-        --disable-network-policy \
-        --disable-kube-proxy \
+        '--cluster-init' \
+        '--node-ip' \ 
+        '{{ zerotier_ip }}' \
+        '--node-label kubernetes.io/role=master' \
+        '--no-deploy' \
+        'traefik' \
+        '--no-deploy' \
+        'servicelb' \
+        '--tls-san' \
+        '{{ zerotier_ip }}' \
+        '--etcd-snapshot-retention=24' \
+        '--flannel-backend=none' \
+        '--disable-network-policy' \
+        '--disable-kube-proxy' \
+        '--kube-proxy-arg "metrics-bind-address=0.0.0.0"' \
+        '--kube-scheduler-arg "bind-address=0.0.0.0"' \ 
+        '--kube-controller-arg "bind-address=0.0.0.0"'
