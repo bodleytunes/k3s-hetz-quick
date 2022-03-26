@@ -119,7 +119,7 @@
 
 - name: Download and extract helm
   unarchive:
-    src: "https://get.helm.sh/helm-{{ helm_version }}-linux-{{ system_arch }}.tar.gz"
+    src: "https://get.helm.sh/helm-{{ helm_version.stdout }}-linux-{{ system_arch }}.tar.gz"
     dest: /tmp
     remote_src: yes
   tags: [helm]
