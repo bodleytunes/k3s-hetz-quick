@@ -1,9 +1,12 @@
 - hosts: 
     - masters
+    - workers
   gather_facts: true
   become: True
   any_errors_fatal: false
-  tags: ['download_k3s']
+  tags: ['k3s']
   tasks:
     - import_role:
         name: k3s
+        tasks_from: download
+      tags: ['download_k3s']
