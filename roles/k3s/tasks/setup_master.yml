@@ -1,5 +1,14 @@
 ---
 
+# install packages via apt
+- name: install packages via apt
+  apt:
+    name: '{{ item }}'
+    state: latest
+  with_items:
+    - jq
+  when: ansible_facts.architecture == "x86_64"
+
 
 - name: zerotier get ip info from
   command: zerotier-cli listnetworks 1db510c0229f8d55 -j
