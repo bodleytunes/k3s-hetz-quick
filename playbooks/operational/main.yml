@@ -22,3 +22,15 @@
         name: k3s
         tasks_from: setup_master
       tags: ['install_master']
+
+- hosts: 
+    - workers
+  gather_facts: true
+  become: True
+  any_errors_fatal: false
+  tags: ['install_worker']
+  tasks:
+    - import_role:
+        name: k3s
+        tasks_from: setup_worker
+      tags: ['install_worker']
