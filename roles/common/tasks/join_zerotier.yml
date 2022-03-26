@@ -12,7 +12,7 @@
     owner: root
     group: root
     mode: 0775
-    #group: wheel
+    #group: root
 
 - name: zerotier | add ansible status collector
   copy:
@@ -23,7 +23,7 @@
     dest: /usr/local/etc/ansible/facts.d/zt_info.fact
     mode: 0750
     owner: root
-    group: wheel
+    group: root
   tags:
     - zerotier
 
@@ -38,7 +38,7 @@
     dest: /usr/local/etc/ansible/facts.d/zt_peers.fact
     mode: 0750
     owner: root
-    group: wheel
+    group: root
   tags:
     - zerotier
 
@@ -51,7 +51,7 @@
     dest: /usr/local/etc/ansible/facts.d/zt_networks.fact
     mode: 0750
     owner: root
-    group: wheel
+    group: root
   tags:
     - zerotier
 
