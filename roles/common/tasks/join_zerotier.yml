@@ -1,8 +1,16 @@
 # run zerotier command with ansible to join network
 # zerotier-cli join <network_id>
-- name: zerotier join network
-  shell: zerotier-cli join {{ zerotier_network_id }}
-  when: zerotier_network_id is defined
+#- name: zerotier join network
+#  shell: zerotier-cli join {{ zerotier_network_id }}
+#  when: zerotier_network_id is defined
+
+- name: zerotier | join network
+  command: /usr/local/bin/zerotier-cli -j join {{ zerotier_network_id }}
+  register: zerotier_network
+  when: not ansible_check_mode
+  changed_when: false
+  tags:
+    - zerotier
 
 # create directory with ansible
 - name: create ansible directory
@@ -55,6 +63,14 @@
   tags:
     - zerotier
 
+- name: zerotier | get local node address
+  # check_mode: no means "always run this task"
+  command: /usr/local/bin/zerotier-cli -j info
+  register: zerotier_info
+  check_mode: False
+  changed_when: false
+  tags:
+    - zerotier
 
 - name: zerotier | dump info response
   debug:
