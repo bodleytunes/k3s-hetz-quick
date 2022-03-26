@@ -79,7 +79,7 @@
   set_fact: 
     helm_version_final: "{{ helm_version.stdout | from_json | community.general.json_query(tag_query) }}"
   vars:
-    tag_query: "[.][0].tag_name"
+    tag_query: "[*][0].tag_name"
   tags: [helm]
   when: ( "{{ inventory_hostname }}" == "{{ groups['masters'][0] }}" )
 
