@@ -73,6 +73,12 @@
   register: helm_version
   when: ( "{{ inventory_hostname }}" == "{{ groups['masters'][0] }}" )
 
+# get tag name from returned json with ansible
+- name: get tag name from returned json
+  set_fact: 
+    helm_version: "{{ (helm_version.stdout | from_json).tag_name }}"
+
+
 - name: Download and extract helm
   unarchive:
     src: "https://get.helm.sh/helm-{{ helm_version }}-linux-{{ system_arch }}.tar.gz"
