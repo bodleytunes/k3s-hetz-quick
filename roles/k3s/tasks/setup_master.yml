@@ -119,11 +119,11 @@
 
 - name: set fact
   set_fact:
-    helm_version: ( {{ helm_version.stdout }} | replace('"','')  )
+    helm_version2: ( {{ helm_version.stdout }} | replace('"','')  )
 
 - name: Download and extract helm
   unarchive:
-    src: "https://get.helm.sh/helm-{{ helm_version }}-linux-{{ system_arch }}.tar.gz"
+    src: "https://get.helm.sh/helm-{{ helm_version2 }}-linux-{{ system_arch }}.tar.gz"
     dest: /tmp
     remote_src: yes
   tags: [helm]
