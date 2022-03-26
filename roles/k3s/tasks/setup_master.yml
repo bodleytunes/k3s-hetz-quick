@@ -7,7 +7,6 @@
     state: latest
   with_items:
     - jq
-  when: ansible_facts.architecture == "x86_64"
   tags: [helm]
 
 
