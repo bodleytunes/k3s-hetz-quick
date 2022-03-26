@@ -17,6 +17,16 @@
   tags:
     - zerotier
 
+# create directory with ansible
+- name: create ansible directory
+  file:
+    path: /usr/local/etc/ansible/
+    state: directory
+    owner: root
+    group: wheel
+  tags:
+    - ansible
+
 - name: zerotier | add ansible peer status collector
   copy:
     content: |
