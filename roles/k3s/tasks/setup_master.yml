@@ -50,7 +50,7 @@
   register: k3s_service
   template:
     src: "k3s.service.j2"
-    dest: "k3s.service"
+    dest: "{{ systemd_dir }}/k3s.service"
     owner: root
     group: root
     mode: 0755
