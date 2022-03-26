@@ -88,7 +88,7 @@
 - name: Download and extract helm
   unarchive:
     src: "https://get.helm.sh/helm-{{ helm_version }}-linux-{{ system_arch }}.tar.gz"
-    dest: /home/ubuntu/
+    dest: /tmp
     remote_src: yes
   tags: [helm]
   when: ( "{{ inventory_hostname }}" == "{{ groups['masters'][0] }}" )
@@ -96,8 +96,8 @@
 
 - name: Move helm binary 
   shell: |
-    mv linux-{{ system_arch }}/helm /usr/bin/helm
-    rm -rf /home/ubuntu/linux-{{ system_arch }}
+    mv /tmp/linux-{{ system_arch }}/helm /usr/bin/helm
+    rm -rf /tmp/linux-{{ system_arch }}
  #   rm -rf /home/ubuntu/linux-arm64
   become: yes
   tags: [helm]
