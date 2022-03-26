@@ -58,7 +58,7 @@ ExecStartPre=-/sbin/modprobe overlay
 ExecStart=/usr/local/bin/k3s \
     server \
         --cluster-init \
-        --node-ip {{ zerotier_ip_address }} \\
+        --node-ip {{ zerotier_ip }} \\
         --node-label master.wizznet.co.uk/roles=master \
         --no-deploy traefik \
         --no-deploy servicelb \
