@@ -81,11 +81,6 @@
 
 
 ##### download latest helm version tag
-- name: Download latest helm version
-  command: curl -s https://api.github.com/repos/helm/helm/releases/latest
-  register: helm_version
-  when: ( "{{ inventory_hostname }}" == "{{ groups['masters'][0] }}" )
-  tags: [helm]
 
 # # get tag name from returned json with ansible json_query
 # - name: get tag name from returned json
@@ -109,21 +104,22 @@
 #   tags: [helm]
 #   when: ( "{{ inventory_hostname }}" == "{{ groups['masters'][0] }}" )
 
-- name: get curl output
-  shell: curl -s https://api.github.com/repos/helm/helm/releases/latest | jq [.][0].tag_name
-  args:
-    warn: no
-  register: helm_version 
-  when: ( "{{ inventory_hostname }}" == "{{ groups['masters'][0] }}" )
-  tags: [helm]
+# - name: get curl output
+#   shell: curl -s https://api.github.com/repos/helm/helm/releases/latest | jq [.][0].tag_name
+#   args:
+#     warn: no
+#   register: helm_version 
+#   when: ( "{{ inventory_hostname }}" == "{{ groups['masters'][0] }}" )
+#   tags: [helm]
 
-- name: set fact
-  set_fact:
-    helm_version2: ( {{ helm_version.stdout }} | replace('"','')  )
+#- name: set fact
+#  set_fact:
+#    helm_version: ( {{ helm_version.stdout }} | replace('"','')  )
 
 - name: Download and extract helm
   unarchive:
-    src: "https://get.helm.sh/helm-{{ helm_version2 }}-linux-{{ system_arch }}.tar.gz"
+    #src: "https://get.helm.sh/helm-{{ helm_version }}-linux-{{ system_arch }}.tar.gz"
+    src: "https://get.helm.sh/helm-v3.8.1-linux-{{ system_arch }}.tar.gz"
     dest: /tmp
     remote_src: yes
   tags: [helm]
