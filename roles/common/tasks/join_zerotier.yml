@@ -5,7 +5,7 @@
 #  when: zerotier_network_id is defined
 
 - name: zerotier | join network
-  command: /usr/local/bin/zerotier-cli -j join {{ zerotier_network_id }}
+  command: zerotier-cli -j join {{ zerotier_network_id }}
   register: zerotier_network
   when: not ansible_check_mode
   changed_when: false
