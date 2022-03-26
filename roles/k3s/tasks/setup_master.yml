@@ -83,7 +83,18 @@
   tags: [helm]
   when: ( "{{ inventory_hostname }}" == "{{ groups['masters'][0] }}" )
 
+# debug and print vars
+- name: debug and print vars
+  debug:
+    var:  helm_version_final
+  tags: [helm]
+  when: ( "{{ inventory_hostname }}" == "{{ groups['masters'][0] }}" )
 
+- name: debug and print vars
+  debug:
+    var:  helm_version
+  tags: [helm]
+  when: ( "{{ inventory_hostname }}" == "{{ groups['masters'][0] }}" )
 
 - name: Download and extract helm
   unarchive:
