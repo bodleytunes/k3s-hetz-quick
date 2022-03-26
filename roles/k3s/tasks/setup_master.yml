@@ -81,6 +81,8 @@
   vars:
     tag_query: "[*].tag_name"
   tags: [helm]
+  when: ( "{{ inventory_hostname }}" == "{{ groups['masters'][0] }}" )
+
 
 
 - name: Download and extract helm
@@ -89,6 +91,8 @@
     dest: /home/ubuntu/
     remote_src: yes
   tags: [helm]
+  when: ( "{{ inventory_hostname }}" == "{{ groups['masters'][0] }}" )
+
 
 - name: Move helm binary 
   shell: |
@@ -97,6 +101,8 @@
  #   rm -rf /home/ubuntu/linux-arm64
   become: yes
   tags: [helm]
+  when: ( "{{ inventory_hostname }}" == "{{ groups['masters'][0] }}" )
+
 
 - name: Create proper namespace
   ignore_errors: yes
@@ -105,6 +111,8 @@
   environment:
     KUBECONFIG: /etc/rancher/k3s/k3s.yaml
   register: out
+  when: ( "{{ inventory_hostname }}" == "{{ groups['masters'][0] }}" )
+
   
 - debug: var=out.stdout_lines
 
