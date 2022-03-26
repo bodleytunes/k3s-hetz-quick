@@ -67,11 +67,16 @@
 
 
 
-##### Add Let's Encrypt
+##### download latest helm version
+- name: Download latest helm version
+  raw:
+    - curl -s https://api.github.com/repos/helm/helm/releases/latest | jq -r '.tag_name'
+  register: helm_version
+  when: ( "{{ inventory_hostname }}" == "{{ groups['masters'][0] }}" )
 
 - name: Download and extract helm
   unarchive:
-    src: "https://get.helm.sh/helm-v3.6.2-linux-{{ system_arch }}.tar.gz"
+    src: "https://get.helm.sh/helm-{{ helm_version }}-linux-{{ system_arch }}.tar.gz"
     dest: /home/ubuntu/
     remote_src: yes
 
