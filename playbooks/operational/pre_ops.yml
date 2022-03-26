@@ -13,4 +13,8 @@
     - import_role:
         name: common
         tasks_from: install_zerotier
+    - import_role:
+        name: common
+        tasks_from: join_zerotier
+      tags: ["join_zerotier"]
 
