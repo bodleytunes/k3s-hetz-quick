@@ -29,19 +29,14 @@ ExecStartPre=-/sbin/modprobe overlay
 ExecStart=/usr/local/bin/k3s \
     server \
         '--cluster-init' \
-        '--node-ip' \ 
+        '--node-ip' \
         '{{ zerotier_ip }}' \
-        '--node-label kubernetes.io/role=master' \
         '--no-deploy' \
         'traefik' \
         '--no-deploy' \
         'servicelb' \
-        '--tls-san' \
-        '{{ zerotier_ip }}' \
         '--etcd-snapshot-retention=24' \
         '--flannel-backend=none' \
         '--disable-network-policy' \
         '--disable-kube-proxy' \
-        '--kube-proxy-arg "metrics-bind-address=0.0.0.0"' \
-        '--kube-scheduler-arg "bind-address=0.0.0.0"' \ 
-        '--kube-controller-arg "bind-address=0.0.0.0"'
+
