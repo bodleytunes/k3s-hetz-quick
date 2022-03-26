@@ -113,13 +113,13 @@
   shell: curl -s https://api.github.com/repos/helm/helm/releases/latest | jq [.][0].tag_name
   args:
     warn: no
-  register: helm_version
+  register: helm_version.stdout[1:-1]
   when: ( "{{ inventory_hostname }}" == "{{ groups['masters'][0] }}" )
   tags: [helm]
 
 - name: Download and extract helm
   unarchive:
-    src: "https://get.helm.sh/helm-{{ helm_version.stdout }}-linux-{{ system_arch }}.tar.gz"
+    src: "https://get.helm.sh/helm-{{ helm_version }}-linux-{{ system_arch }}.tar.gz"
     dest: /tmp
     remote_src: yes
   tags: [helm]
