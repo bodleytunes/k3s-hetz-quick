@@ -77,7 +77,7 @@
 # get tag name from returned json with ansible json_query
 - name: get tag name from returned json
   set_fact: 
-    helm_version: "{{ helm_versiont | from_json | community.general.json_query(tag_query) }}"
+    helm_version: "{{ helm_version | from_json | community.general.json_query(tag_query) }}"
   vars:
     tag_query: ".tag_name"
   tags: [helm]
