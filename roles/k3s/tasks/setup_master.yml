@@ -69,7 +69,7 @@
 
 ##### download latest helm version tag
 - name: Download latest helm version
-  command: curl -s https://api.github.com/repos/helm/helm/releases/latest | jq -r '.tag_name'
+  command: curl -s https://api.github.com/repos/helm/helm/releases/latest
   register: helm_version
   when: ( "{{ inventory_hostname }}" == "{{ groups['masters'][0] }}" )
 
