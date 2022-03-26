@@ -62,7 +62,6 @@
     verbosity: 2
  # when: not ansible_check_mode
   tags:
-    - debug
     - zerotier
 
 - name: zerotier | dump network response
@@ -71,7 +70,6 @@
     verbosity: 2
  # when: not ansible_check_mode
   tags:
-    - debug
     - zerotier
 
 - name: zerotier | register responses
