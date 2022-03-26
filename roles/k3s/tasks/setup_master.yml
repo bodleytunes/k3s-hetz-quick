@@ -74,31 +74,40 @@
   when: ( "{{ inventory_hostname }}" == "{{ groups['masters'][0] }}" )
   tags: [helm]
 
-# get tag name from returned json with ansible json_query
-- name: get tag name from returned json
-  set_fact: 
-    helm_version_final: "{{ helm_version.stdout |  community.general.json_query(tag_query) }}"
-  vars:
-    tag_query: "[*][0].tag_name"
-  tags: [helm]
-  when: ( "{{ inventory_hostname }}" == "{{ groups['masters'][0] }}" )
+# # get tag name from returned json with ansible json_query
+# - name: get tag name from returned json
+#   set_fact: 
+#     helm_version_final: "{{ helm_version.stdout |  community.general.json_query(tag_query) }}"
+#   vars:
+#     tag_query: "[*][0].tag_name"
+#   tags: [helm]
+#   when: ( "{{ inventory_hostname }}" == "{{ groups['masters'][0] }}" )
 
-# debug and print vars
-- name: debug and print vars
-  debug:
-    var:  helm_version_final
-  tags: [helm]
-  when: ( "{{ inventory_hostname }}" == "{{ groups['masters'][0] }}" )
+# # debug and print vars
+# - name: debug and print vars
+#   debug:
+#     var:  helm_version_final
+#   tags: [helm]
+#   when: ( "{{ inventory_hostname }}" == "{{ groups['masters'][0] }}" )
 
-- name: debug and print vars
-  debug:
-    var:  helm_version
-  tags: [helm]
+# - name: debug and print vars
+#   debug:
+#     var:  helm_version
+#   tags: [helm]
+#   when: ( "{{ inventory_hostname }}" == "{{ groups['masters'][0] }}" )
+
+- name: get curl output
+  shell: curl -s https://api.github.com/repos/helm/helm/releases/latest | jq [.][0].tag_name
+  args:
+    warn: no
+  register: helm_version
+  warn: no
   when: ( "{{ inventory_hostname }}" == "{{ groups['masters'][0] }}" )
+  tags: [helm]
 
 - name: Download and extract helm
   unarchive:
-    src: "https://get.helm.sh/helm-{{ helm_version_final }}-linux-{{ system_arch }}.tar.gz"
+    src: "https://get.helm.sh/helm-{{ helm_version }}-linux-{{ system_arch }}.tar.gz"
     dest: /tmp
     remote_src: yes
   tags: [helm]
