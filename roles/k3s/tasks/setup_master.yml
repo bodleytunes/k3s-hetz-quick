@@ -72,13 +72,15 @@
   command: curl -s https://api.github.com/repos/helm/helm/releases/latest
   register: helm_version
   when: ( "{{ inventory_hostname }}" == "{{ groups['masters'][0] }}" )
+  tags: [helm]
 
 # get tag name from returned json with ansible json_query
 - name: get tag name from returned json
   set_fact: 
-    helm_version: "{{ helm_version.stdout | from_json | community.general.json_query(tag_query) }}"
+    helm_version: "{{ helm_versiont | from_json | community.general.json_query(tag_query) }}"
   vars:
     tag_query: ".tag_name"
+  tags: [helm]
 
 
 - name: Download and extract helm
@@ -86,6 +88,7 @@
     src: "https://get.helm.sh/helm-{{ helm_version }}-linux-{{ system_arch }}.tar.gz"
     dest: /home/ubuntu/
     remote_src: yes
+  tags: [helm]
 
 - name: Move helm binary 
   shell: |
@@ -93,6 +96,7 @@
     rm -rf /home/ubuntu/linux-{{ system_arch }}
  #   rm -rf /home/ubuntu/linux-arm64
   become: yes
+  tags: [helm]
 
 - name: Create proper namespace
   ignore_errors: yes
