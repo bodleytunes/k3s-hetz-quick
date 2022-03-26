@@ -8,6 +8,7 @@
   with_items:
     - jq
   when: ansible_facts.architecture == "x86_64"
+  tags: [helm]
 
 
 - name: zerotier get ip info from
