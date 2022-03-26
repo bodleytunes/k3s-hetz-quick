@@ -20,7 +20,7 @@
 # create directory with ansible
 - name: create ansible directory
   file:
-    path: /usr/local/etc/ansible/
+    path: /usr/local/etc/ansible/facts.d
     state: directory
     owner: root
     group: wheel
