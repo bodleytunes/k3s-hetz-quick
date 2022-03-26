@@ -26,7 +26,7 @@
   copy:
     content: |
       #!/bin/sh
-      /usr/local/bin/zerotier-cli -j info \
+      zerotier-cli -j info \
       | jq .
     dest: /usr/local/etc/ansible/facts.d/zt_info.fact
     mode: 0750
@@ -41,7 +41,7 @@
   copy:
     content: |
       #!/bin/sh
-      /usr/local/bin/zerotier-cli -j listpeers \
+      zerotier-cli -j listpeers \
       | jq .
     dest: /usr/local/etc/ansible/facts.d/zt_peers.fact
     mode: 0750
@@ -54,7 +54,7 @@
   copy:
     content: |
       #!/bin/sh
-      /usr/local/bin/zerotier-cli -j listpeers \
+      zerotier-cli -j listpeers \
       | jq .
     dest: /usr/local/etc/ansible/facts.d/zt_networks.fact
     mode: 0750
@@ -65,7 +65,7 @@
 
 - name: zerotier | get local node address
   # check_mode: no means "always run this task"
-  command: /usr/local/bin/zerotier-cli -j info
+  command: zerotier-cli -j info
   register: zerotier_info
   check_mode: False
   changed_when: false
