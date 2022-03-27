@@ -46,10 +46,11 @@
  # when: not ansible_check_mode
   tags:
     - zerotier
-
+    
+# use json query to pick address
 - name: zerotier | register responses
   set_fact:
-    zerotier_ip:      "{{ (zerotier_network.stdout |from_json)[0].assignedAddresses[0] | replace('/24','') }}"
+    zerotier_ip:      "{{ (zerotier_network.stdout | from_json ) [0].assignedAddresses[0] | replace('/24','') }}"
    # zerotier_address: "{{ (zerotier_info.stdout |from_json).address }}"
    # zerotier_device:  "{{ (zerotier_network.stdout |from_json).portDeviceName }}"
    # zerotier_name:    "{{ (zerotier_network.stdout |from_json).name }}"
