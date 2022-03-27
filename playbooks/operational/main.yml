@@ -43,6 +43,10 @@
         name: k3s
         tasks_from: setup_master
       tags: ['install_master']
+    - import_role:
+        name: k3s
+        tasks_from: get_tokens
+      tags: ['get_tokens']
 
 - hosts: 
     - workers
