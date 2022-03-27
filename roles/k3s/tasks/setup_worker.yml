@@ -1,7 +1,7 @@
-- name: Copy K3s service file for the rest
+- name: Copy K3s service file for the workers
   register: k3s_service
   template:
-    src: "k3s.service-rest.j2"
+    src: "k3s-worker.service.j2"
     dest: "k3s.service"
     owner: root
     group: root

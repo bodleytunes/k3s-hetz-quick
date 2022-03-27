@@ -53,5 +53,13 @@
   tasks:
     - import_role:
         name: k3s
+        tasks_from: k3s_uninstall
+      tags: ['k3s_uninstall']
+    - import_role:
+        name: k3s
+        tasks_from: download
+      tags: ['download_k3s']
+    - import_role:
+        name: k3s
         tasks_from: setup_worker
       tags: ['install_worker']
